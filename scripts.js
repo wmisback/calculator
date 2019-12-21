@@ -41,3 +41,7 @@ function factorial(a) {
 	}
 	return ans;
 }
+
+function operate(operator, a, b) {
+	operator(a, b);
+}
