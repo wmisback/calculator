@@ -1,7 +1,15 @@
 let calculatorData = {
-	displayVal: 0;
-	operandA: 0;
-	operandB: 0;
+	displayVal: 0,
+	operandA: 0,
+	operandB: 0,
+	oeperation: "",
+}
+
+let operationTranslator = {
+	+: 'add',
+	-: 'subtract',
+	x: 'multiply',
+	/: 'divide',
 }
 
 let displayVal = 0;
@@ -65,21 +73,33 @@ function clearDisplay() {
 }
 
 function updateDisplayValue() {
-	document.querySelector("#display").textContent = displayVal;
+	document.querySelector("#display").textContent = calculatorData.displayVal;
 }
 
-// Attach EventListeners to numbers
+// Attach EventListeners to number buttons
 let numberButtons = Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		if (displayVal == 0) {
-			displayVal = button.textContent;
+		if (calculatorData.displayVal == 0) {
+			calculatorData.displayVal = button.textContent;
+			console.log(calculatorData.displayVal);
 		} else {
-			displayVal = displayVal.toString() + button.textContent;
+			calculatorData.displayVal = calculatorData.displayVal.toString() +
+					button.textContent;
+			console.log(calculatorData.displayVal);
 		}
 		updateDisplayValue();
 	}));
 });
 
-// Attach EventListeners to the operators
+// Attach EventListeners to the operator buttons
+let operationButtons = Array.from(document.querySelectorAll(".operation"));
+operationButtons.forEach(function(button) {
+	button.addEventListener("click", (function() {
+		calculatorData.operandA = calculatorData.displayVal;
+		calculatorData.operation = operationTranslator[button.textContent];
+
+		updateDisplayValue();
+	}));
+});
 
