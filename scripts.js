@@ -1,8 +1,7 @@
 let calculatorData = {
 	displayVal: 0,
-	operandA: 0,
-	operandB: 0,
-	oeperation: "",
+	operands = [],
+	operations: [],
 }
 
 let operationTranslator = {
@@ -11,10 +10,6 @@ let operationTranslator = {
 	x: 'multiply',
 	/: 'divide',
 }
-
-let displayVal = 0;
-let operandA = 0;
-let operandB = 0;
 
 function add (a, b) {
 	return a + b;
@@ -61,13 +56,13 @@ function factorial(a) {
 }
 
 function operate(operator, a, b) {
-	operator(a, b);
+	calculatorData.displayVal = operator(a, b);
+	updateDisplayValue();
 }
 
 function clearDisplay() {
 	calculatorData.displayVal = 0;
-	calculatorData.operandA = 0;
-	calculatorData.operandB = 0;
+	calculatorData.operands = [];
 
 	updateDisplayValue();
 }
@@ -96,8 +91,8 @@ numberButtons.forEach(function(button) {
 let operationButtons = Array.from(document.querySelectorAll(".operation"));
 operationButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		calculatorData.operandA = calculatorData.displayVal;
-		calculatorData.operation = operationTranslator[button.textContent];
+		calculatorData.operands.push(calculatorData.displayVal);
+		calculatorData.operations.push(operationTranslator[button.textContent]);
 
 		updateDisplayValue();
 	}));
