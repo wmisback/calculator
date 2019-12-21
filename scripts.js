@@ -1,3 +1,5 @@
+let displayVal = 0;
+
 function add (a, b) {
 	return a + b;
 }
@@ -45,3 +47,34 @@ function factorial(a) {
 function operate(operator, a, b) {
 	operator(a, b);
 }
+
+function clearDisplay() {
+	displayVal = 0;
+	updateDisplayValue();
+}
+
+function updateDisplayValue() {
+	document.querySelector("#display").textContent = displayVal;
+}
+
+function enterNum(e) {
+	if (displayVal == 0) {
+		displayVal = e.target.textContent;
+	} else {
+		displayVal = displayVal.toString() + e.target.textContent;
+	}
+	updateDisplayValue();
+}
+
+// Attach eventlisteners to numbers
+let numberButtons = Array.from(document.querySelectorAll(".number"));
+numberButtons.forEach(function(button) {
+	button.addEventListener("click", (function() {
+		if (displayVal == 0) {
+			displayVal = button.textContent;
+		} else {
+			displayVal = displayVal.toString() + button.textContent;
+		}
+		updateDisplayValue();
+	}));
+});
