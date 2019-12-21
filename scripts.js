@@ -13,11 +13,20 @@ function sum (a) {
 	return sum;
 }
 
-function multiply (a) {
-	const ans = a.reduce((total, index) => {
-		return total * index;
-	}, 1);
-	return ans;
+// Multiply with array, can take 3+ operands
+// function multiply (a) {
+// 	const ans = a.reduce((total, index) => {
+// 		return total * index;
+// 	}, 1);
+// 	return ans;
+// }
+
+function multiply(a, b) {
+	return a * b;
+}
+
+function divide (a, b) {
+	return a / b;
 }
 
 function power(a, b) {
