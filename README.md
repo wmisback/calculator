@@ -3,7 +3,7 @@
 ## Goal
 I will create a web calculator
 
-##This project will help me practice the following
+## This project will help me practice the following
 - JavaScript interactions with HTML
 - JavaScript mathematics programming
 - HTML structuring
