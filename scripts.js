@@ -1,4 +1,12 @@
+let calculatorData = {
+	displayVal: 0;
+	operandA: 0;
+	operandB: 0;
+}
+
 let displayVal = 0;
+let operandA = 0;
+let operandB = 0;
 
 function add (a, b) {
 	return a + b;
@@ -49,7 +57,10 @@ function operate(operator, a, b) {
 }
 
 function clearDisplay() {
-	displayVal = 0;
+	calculatorData.displayVal = 0;
+	calculatorData.operandA = 0;
+	calculatorData.operandB = 0;
+
 	updateDisplayValue();
 }
 
@@ -57,16 +68,7 @@ function updateDisplayValue() {
 	document.querySelector("#display").textContent = displayVal;
 }
 
-function enterNum(e) {
-	if (displayVal == 0) {
-		displayVal = e.target.textContent;
-	} else {
-		displayVal = displayVal.toString() + e.target.textContent;
-	}
-	updateDisplayValue();
-}
-
-// Attach eventlisteners to numbers
+// Attach EventListeners to numbers
 let numberButtons = Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
@@ -78,3 +80,6 @@ numberButtons.forEach(function(button) {
 		updateDisplayValue();
 	}));
 });
+
+// Attach EventListeners to the operators
+
