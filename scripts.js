@@ -111,7 +111,7 @@ function findSolution() {
 let numberButtons = Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		if (calculatorData.displayVal == 0) {
+		if (calculatorData.displayVal == 0 || calculatorData.displayVal.toString() == "NaN") {
 			calculatorData.displayVal = button.textContent;
 		} else {
 			calculatorData.displayVal = calculatorData.displayVal.toString() +
@@ -125,7 +125,7 @@ numberButtons.forEach(function(button) {
 let operationButtons = Array.from(document.querySelectorAll(".operation"));
 operationButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		if (calculatorData.displayVal == 0) {
+		if (calculatorData.displayVal == 0 || calculatorData.displayVal.toString() == "NaN") {
 			calculatorData.displayVal = button.textContent;
 		} else {
 			calculatorData.displayVal = `${calculatorData.displayVal.toString()} ${button.textContent} `;
