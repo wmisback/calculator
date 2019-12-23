@@ -12,11 +12,11 @@ const operationTranslator = {
 const orderOfOps = ['x', '/', '+', '-'];
 
 function add (a, b) {
-	return a + b;
+	return parseInt(a) + b;
 }
 
 function subtract (a, b) {
-	return a - b;
+	return parseInt(a) - b;
 }
 
 function sum (a) {
@@ -89,11 +89,14 @@ function findSolution() {
 	let opsAndOps = calculatorData.displayVal.split(' ');
 	//While still operands to operate on
 	while (opsAndOps.length > 1) {
-		//For each 
+		//For each operation find the answer and replace 2 operands and operator
 		orderOfOps.forEach(function(operator) {
 			for (let i=0;i<opsAndOps.length;i++) {
 				if (opsAndOps[i] == operator) {
+					console.log(opsAndOps.join(' '));
+					console.log(`${opsAndOps[i-1]} | ${opsAndOps[i]} | ${opsAndOps[i+1]} | =`)
 					let ans = operate(operator, opsAndOps[i-1], opsAndOps[i+1]);
+					console.log(ans);
 					opsAndOps.splice(i-1, 3, ans);
 				}
 			}
