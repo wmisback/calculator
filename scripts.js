@@ -1,14 +1,12 @@
 let calculatorData = {
 	displayVal: 0,
-	operands = [],
-	operations: [],
 }
 
-let operationTranslator = {
-	+: 'add',
-	-: 'subtract',
-	x: 'multiply',
-	/: 'divide',
+const operationTranslator = {
+	'+': 'add',
+	'-': 'subtract',
+	'x': 'multiply',
+	'/': 'divide',
 }
 
 function add (a, b) {
@@ -77,11 +75,9 @@ numberButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
 		if (calculatorData.displayVal == 0) {
 			calculatorData.displayVal = button.textContent;
-			console.log(calculatorData.displayVal);
 		} else {
 			calculatorData.displayVal = calculatorData.displayVal.toString() +
 					button.textContent;
-			console.log(calculatorData.displayVal);
 		}
 		updateDisplayValue();
 	}));
@@ -91,8 +87,13 @@ numberButtons.forEach(function(button) {
 let operationButtons = Array.from(document.querySelectorAll(".operation"));
 operationButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		calculatorData.operands.push(calculatorData.displayVal);
-		calculatorData.operations.push(operationTranslator[button.textContent]);
+		if (calculatorData.displayVal == 0) {
+			calculatorData.displayVal = button.textContent;
+		} else {
+			calculatorData.displayVal = ` 
+					${calculatorData.displayVal.toString()} 
+					${button.textContent} `;
+		}
 
 		updateDisplayValue();
 	}));
