@@ -1,5 +1,5 @@
 let calculatorData = {
-	displayVal: 0,
+	displayVal: "",
 }
 
 const operationTranslator = {
@@ -8,6 +8,8 @@ const operationTranslator = {
 	'x': 'multiply',
 	'/': 'divide',
 }
+
+const orderOfOps = ['x', '/', '+', '-'];
 
 function add (a, b) {
 	return a + b;
@@ -54,19 +56,52 @@ function factorial(a) {
 }
 
 function operate(operator, a, b) {
-	calculatorData.displayVal = operator(a, b);
-	updateDisplayValue();
+	let operation = operationTranslator[operator];
+	let ans = 0;
+	switch(operation) {
+		case "multiply":
+		ans = multiply(a, b);
+		break;
+		case "divide":
+		ans = divide(a, b);
+		break;
+		case "add":
+		ans = add(a, b);
+		break;
+		case "subtract":
+		ans = subtract(a, b);
+		break;
+	}
+	return ans;
 }
 
 function clearDisplay() {
 	calculatorData.displayVal = 0;
-	calculatorData.operands = [];
 
 	updateDisplayValue();
 }
 
 function updateDisplayValue() {
 	document.querySelector("#display").textContent = calculatorData.displayVal;
+}
+
+function findSolution() {
+	let opsAndOps = calculatorData.displayVal.split(' ');
+	//While still operands to operate on
+	while (opsAndOps.length > 1) {
+		//For each 
+		orderOfOps.forEach(function(operator) {
+			for (let i=0;i<opsAndOps.length;i++) {
+				if (opsAndOps[i] == operator) {
+					let ans = operate(operator, opsAndOps[i-1], opsAndOps[i+1]);
+					opsAndOps.splice(i-1, 3, ans);
+				}
+			}
+		});
+	}
+
+	calculatorData.displayVal = opsAndOps[0];
+	updateDisplayValue();
 }
 
 // Attach EventListeners to number buttons
@@ -90,12 +125,22 @@ operationButtons.forEach(function(button) {
 		if (calculatorData.displayVal == 0) {
 			calculatorData.displayVal = button.textContent;
 		} else {
-			calculatorData.displayVal = ` 
-					${calculatorData.displayVal.toString()} 
-					${button.textContent} `;
+			calculatorData.displayVal = `${calculatorData.displayVal.toString()} ${button.textContent} `;
 		}
 
 		updateDisplayValue();
 	}));
 });
+
+//Attach EventListener to equals button
+let equalsButton = document.querySelector("#equals");
+equalsButton.addEventListener("click", (function() {
+	if (calculatorData.displayVal == 0) {
+		calculatorData.displayVal = button.textContent;
+	} else {
+		findSolution();
+	}
+
+	updateDisplayValue();
+}));
 
