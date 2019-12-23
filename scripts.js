@@ -12,11 +12,11 @@ const operationTranslator = {
 const orderOfOps = ['x', '/', '+', '-'];
 
 function add (a, b) {
-	return parseInt(a) + b;
+	return parseInt(a) + parseInt(b);
 }
 
 function subtract (a, b) {
-	return parseInt(a) - b;
+	return parseInt(a) - parseInt(b);
 }
 
 function sum (a) {
@@ -93,10 +93,10 @@ function findSolution() {
 		orderOfOps.forEach(function(operator) {
 			for (let i=0;i<opsAndOps.length;i++) {
 				if (opsAndOps[i] == operator) {
-					console.log(opsAndOps.join(' '));
-					console.log(`${opsAndOps[i-1]} | ${opsAndOps[i]} | ${opsAndOps[i+1]} | =`)
+					//console.log(opsAndOps.join(' '));
+					//console.log(`${opsAndOps[i-1]} ${opsAndOps[i]} ${opsAndOps[i+1]} =`)
 					let ans = operate(operator, opsAndOps[i-1], opsAndOps[i+1]);
-					console.log(ans);
+					//console.log(ans);
 					opsAndOps.splice(i-1, 3, ans);
 				}
 			}

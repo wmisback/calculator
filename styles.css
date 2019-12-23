@@ -1,0 +1,48 @@
+.center {
+  margin: auto;
+  width: 50%;
+}
+
+#calculator {
+	background-color: DarkSlateGrey;
+	width: 212px;
+	padding: 10px;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+/*Button styles*/
+button {
+	height: 50px;
+	width: 50px;
+	margin-top: 5px;
+	margin bottom: 5px;
+	border-radius: 2px;
+}
+
+#clear {
+	width: 212px;
+	background-color: CornflowerBlue;
+	color: white;
+}
+
+#equals {
+	background-color: orange;
+	color: white;
+}
+
+.operation {
+	background-color: DimGrey;
+	color: white;
+}
+
+/*Display style*/
+
+#display {
+	line-height: 30px;
+	background-color: Azure;
+	width: 192px;
+	border-radius: 2px;
+	text-align: right;
+	padding: 10px;
+}
