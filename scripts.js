@@ -1,5 +1,6 @@
 let calculatorData = {
 	displayVal: "0",
+	decimalDisable: false,
 }
 
 const operationTranslator = {
@@ -111,25 +112,32 @@ function findSolution() {
 let numberButtons = Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		if (calculatorData.displayVal == '0' || calculatorData.displayVal.toString() == "NaN") {
-			if (button.textContent == '.') {
-				console.log('yup');
-				calculatorData.displayVal = '0' + button.textContent;
-			} else {
-				calculatorData.displayVal = button.textContent;
-			}
+		if (button.textContent == '.' && calculatorData.decimalDisable) {
+
 		} else {
-			if (button.textContent == '.') {
-				console.log('yup');
-				calculatorData.displayVal = 
-						calculatorData.displayVal.toString() +
-						'0' +
-						button.textContent;
+			if (calculatorData.displayVal == '0' || calculatorData.displayVal.toString() == "NaN") {
+				if (button.textContent == '.') {
+					console.log('yup');
+					calculatorData.displayVal = '0' + button.textContent;
+					calculatorData.decimalDisable = true;
+				} else {
+					calculatorData.displayVal = button.textContent;
+				}
 			} else {
-				calculatorData.displayVal = calculatorData.displayVal.toString() +
-					button.textContent;
+				if (button.textContent == '.') {
+					console.log('yup');
+					calculatorData.displayVal = 
+							calculatorData.displayVal.toString() +
+							'0' +
+							button.textContent;
+					calculatorData.decimalDisable = true;
+				} else {
+					calculatorData.displayVal = calculatorData.displayVal.toString() +
+						button.textContent;
+				}
 			}
 		}
+		
 		updateDisplayValue();
 	}));
 });
@@ -138,6 +146,7 @@ numberButtons.forEach(function(button) {
 let operationButtons = Array.from(document.querySelectorAll(".operation"));
 operationButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
+		calculatorData.decimalDisable = false;
 		if (calculatorData.displayVal == 0 || calculatorData.displayVal.toString() == "NaN") {
 			if (button.textContent == '-') {
 				calculatorData.displayVal = button.textContent;
