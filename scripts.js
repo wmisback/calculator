@@ -111,11 +111,24 @@ function findSolution() {
 let numberButtons = Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
-		if (calculatorData.displayVal == 0 || calculatorData.displayVal.toString() == "NaN") {
-			calculatorData.displayVal = button.textContent;
+		if (calculatorData.displayVal == '0' || calculatorData.displayVal.toString() == "NaN") {
+			if (button.textContent == '.') {
+				console.log('yup');
+				calculatorData.displayVal = '0' + button.textContent;
+			} else {
+				calculatorData.displayVal = button.textContent;
+			}
 		} else {
-			calculatorData.displayVal = calculatorData.displayVal.toString() +
+			if (button.textContent == '.') {
+				console.log('yup');
+				calculatorData.displayVal = 
+						calculatorData.displayVal.toString() +
+						'0' +
+						button.textContent;
+			} else {
+				calculatorData.displayVal = calculatorData.displayVal.toString() +
 					button.textContent;
+			}
 		}
 		updateDisplayValue();
 	}));
