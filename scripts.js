@@ -1,5 +1,5 @@
 let calculatorData = {
-	displayVal: "",
+	displayVal: "0",
 }
 
 const operationTranslator = {
@@ -126,7 +126,11 @@ let operationButtons = Array.from(document.querySelectorAll(".operation"));
 operationButtons.forEach(function(button) {
 	button.addEventListener("click", (function() {
 		if (calculatorData.displayVal == 0 || calculatorData.displayVal.toString() == "NaN") {
-			calculatorData.displayVal = button.textContent;
+			if (button.textContent == '-') {
+				calculatorData.displayVal = button.textContent;
+			} else {
+				calculatorData.displayVal = calculatorData.displayVal;
+			}
 		} else {
 			calculatorData.displayVal = `${calculatorData.displayVal.toString()} ${button.textContent} `;
 		}
